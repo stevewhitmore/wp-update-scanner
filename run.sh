@@ -9,21 +9,17 @@ log_file=$(awk -F= '/logFile/ { print $2 }' config.txt)
 run_update_scanner_script() {
     python ./update_scanner.py "$website"
 }
-output=$(run_update_scanner_script 2>&1)
+error_output=$(run_update_scanner_script 2>&1)
 
-if [ -n "$output" ]; then
-    echo -e "$date_time" '\n' "$output" >> "$log_file"
+if [ -n "$error_output" ]; then
+    echo -e "$date_time" '\n' "$error_output" >> "$log_file"
 
     echo "There was an error while running wp-update-scanner. Please see \"$log_file\" for details" \
     | mail -s "Script Failed: wp-update-scanner" "$report_email"
 
-    exit
-fi
-
-if [ -n "$record_file" ]; then
+elif [ -n "$record_file" ]; then
     mail -s "WordPress Updates Needed" "$report_email" < "$record_file"
 fi
 
-# Make extra sure all processes are dead when script ends
 pkill chromium && pkill chromedriver
 exit
