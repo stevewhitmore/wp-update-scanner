@@ -42,6 +42,11 @@ def run():
     DRIVER.quit()
 
 
+def clean_out_file_contents(record_file):
+    """Wipe out update-data.txt file contents to to avoid misinformation"""
+    open(record_file, 'w').close()
+
+
 def log_into_wordpress():
     """Use configs to log into wordpress. This is needed for custom login urls"""
     username = CONFIG['WordPress']['username']
@@ -61,12 +66,7 @@ def log_into_wordpress():
 
 def navigate_to_core_update_page():
     """Goes to specific core update page"""
-    DRIVER.get(CONFIG['WordPress']['updateUrl'])
-
-
-def clean_out_file_contents(record_file):
-    """Wipe out update-data.txt file contents to to avoid misinformation"""
-    open(record_file, 'w').close()
+    DRIVER.get(CONFIG['WordPress']['updateUrl'])\
 
 
 def scan_for_updates(section):
