@@ -1,0 +1,20 @@
+image: ubuntu:latest
+
+stages:
+  - lint
+
+shellcheck:
+  stage: lint
+  before_script:
+    - apt update && apt install -y shellcheck
+    - shellcheck --version
+  script:
+    - shellcheck *.sh
+
+pylint:
+  image: "python:latest"
+  stage: lint
+  script:
+    - pip install selenium
+    - pip install pylint
+    - pylint *.py

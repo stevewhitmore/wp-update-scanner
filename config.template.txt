@@ -1,0 +1,10 @@
+[WordPress]
+username: foo
+password: bar
+loginUrl: https://your-website.com/wp-login-url
+#updateUrl: https://your-website.com/wp-admin/update-core.php
+updateUrl: file:///home/swhitmore/Downloads/updates.html
+
+[FollowUp]
+email: swhitmore@localhost
+recordFile: ./update-data.txt
