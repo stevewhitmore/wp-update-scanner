@@ -17,3 +17,6 @@ This project is intended to run as a cron job. The bash script kicks off a Pytho
     * OPTIONS.binary_location will need to be changed if non-Linux OS is running this script
 * bash
 * mailx
+
+### \*\*\* TODOs \*\*\*
+* Extend to allow for multiple website configs to be called based on arguments passed to **run.sh**
