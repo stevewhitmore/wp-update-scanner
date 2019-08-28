@@ -26,7 +26,7 @@ CONFIG.read('config.txt')
 WEBSITE = sys.argv[1]
 
 def run():
-    """Kicks off page scraping script"""
+    """Kick off page scraping script"""
     record_file = CONFIG['FollowUp']['recordFile']
     clean_out_file_contents(record_file)
 
@@ -65,7 +65,7 @@ def log_into_wordpress():
 
 
 def navigate_to_core_update_page():
-    """Goes to specific core update page"""
+    """Go to specific core update page"""
     DRIVER.get(CONFIG['WordPress']['updateUrl'])\
 
 
@@ -108,7 +108,7 @@ def determine_selector(section):
 
 
 def write_to_file(output_file, update_data):
-    """Writes values of update data list to output file for notifications"""
+    """Write values of update data list to output file for notifications"""
     with open(output_file, "a") as myfile:
         for item in update_data:
             myfile.write(item + "\n\n")
