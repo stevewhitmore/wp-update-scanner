@@ -4,6 +4,7 @@ Creates a list of string values representing information about the
 needed updates. Those values are written to a text file which is then
 consumed outside of this file to generate a notification
 """
+import sys
 import configparser
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -21,6 +22,8 @@ DRIVER = webdriver.Chrome(options=OPTIONS)
 
 CONFIG = configparser.ConfigParser()
 CONFIG.read('config.txt')
+
+WEBSITE = sys.argv[1]
 
 def run():
     """Kicks off page scraping script"""

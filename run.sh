@@ -1,12 +1,13 @@
 #!/bin/bash
 
+website=$1
 date_time="$(date '+%A, %B %d %Y at %H:%M:%S')"
 report_email=$(awk -F= '/email/ { print $2 }' config.txt)
 record_file=$(awk -F= '/recordFile/ { print $2 }' config.txt)
 log_file=$(awk -F= '/logFile/ { print $2 }' config.txt)
 
 run_update_scanner_script() {
-    python ./update_scanner.py
+    python ./update_scanner.py "$website"
 }
 output=$(run_update_scanner_script 2>&1)
 
