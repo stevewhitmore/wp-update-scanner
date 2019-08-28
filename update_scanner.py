@@ -74,23 +74,20 @@ def scan_for_updates(section):
     try:
         selector = determine_selector(section)
 
-        if 'tbody' in selector:
-            plugin_update_table = WebDriverWait(DRIVER, 10).until( \
-                        EC.presence_of_element_located((By.CSS_SELECTOR, selector)))
+        plugin_update_element = WebDriverWait(DRIVER, 10).until( \
+                    EC.presence_of_element_located((By.CSS_SELECTOR, selector)))
 
-            plugin_title_elements = plugin_update_table \
+        if 'tbody' in selector:
+            plugin_title_elements = plugin_update_element \
                                         .find_elements_by_css_selector('tbody tr td.plugin-title')
             plugin_update_data = []
+
             for title in plugin_title_elements:
                 plugin_update_data.append(title.text)
 
             return plugin_update_data
 
-        wp_version_anchor_tag = WebDriverWait(DRIVER, 10).until( \
-            EC.presence_of_element_located
-            ((By.CSS_SELECTOR, '#wpbody-content > div.wrap > ul.core-updates > li a')))
-
-        return [wp_version_anchor_tag.text]
+        return [plugin_update_element.text]
 
     except NoSuchElementException:
         return []
