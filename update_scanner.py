@@ -25,13 +25,15 @@ CONFIG.read('config.txt')
 def run():
     """Kicks off page scraping script"""
     record_file = CONFIG['FollowUp']['recordFile']
-    # log_into_wordpress()
-    navigate_to_core_update_page()
     clean_out_file_contents(record_file)
+
+    log_into_wordpress()
+    navigate_to_core_update_page()
     core_updates = scan_for_updates('core')
     plugin_updates = scan_for_updates('plugins')
     theme_updates = scan_for_updates('themes')
     update_data = core_updates + plugin_updates + theme_updates
+
     write_to_file(record_file, update_data)
 
     DRIVER.quit()
@@ -110,7 +112,6 @@ def write_to_file(output_file, update_data):
     with open(output_file, "a") as myfile:
         for item in update_data:
             myfile.write(item + "\n\n")
-
 
 
 run()
