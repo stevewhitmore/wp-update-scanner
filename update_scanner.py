@@ -6,7 +6,6 @@ consumed outside of this file to generate a notification
 """
 import sys
 import configparser
-import datetime
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -120,14 +119,13 @@ def determine_selector(section):
 def write_to_file(output_file, update_data):
     """Write values of update data list to output file for notifications"""
     separator = '###################################################'
-    now = datetime.datetime.now()
-    now_formatted = now.strftime('%A, %B %d %Y at %H:%M:%S')
 
     with open(output_file, "a") as myfile:
-        myfile.write(separator + "\n" + now_formatted + " --- "
-                     + WEBSITE + "\n" + separator + "\n")
+        myfile.write(separator + "\n" + " --- " + WEBSITE \
+                     + " --- " + "\n" + separator + "\n")
         for item in update_data:
             myfile.write(item + "\n\n")
 
+        myfile.write("##############--- END MESSAGE ---##################\n\n")
 
 run()
