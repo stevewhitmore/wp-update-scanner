@@ -27,9 +27,6 @@ WEBSITE = sys.argv[1]
 
 def run():
     """Kick off page scraping script"""
-    record_file = CONFIG['FollowUp']['recordFile']
-    clean_out_file_contents(record_file)
-
     log_into_wordpress()
     navigate_to_core_update_page()
 
@@ -38,14 +35,9 @@ def run():
     theme_updates = scan_for_updates('themes')
     update_data = core_updates + plugin_updates + theme_updates
 
-    write_to_file(record_file, update_data)
+    write_to_file(update_data)
 
     DRIVER.quit()
-
-
-def clean_out_file_contents(record_file):
-    """Wipe out update-data.txt file contents to to avoid misinformation"""
-    open(record_file, 'w').close()
 
 
 def log_into_wordpress():
@@ -116,16 +108,15 @@ def determine_selector(section):
     return selector
 
 
-def write_to_file(output_file, update_data):
+def write_to_file(update_data):
     """Write values of update data list to output file for notifications"""
-    separator = '###################################################'
+    if update_data:
+        separator = '###################################################'
 
-    with open(output_file, "a") as myfile:
-        myfile.write(separator + "\n" + " --- " + WEBSITE \
-                     + " --- " + "\n" + separator + "\n")
-        for item in update_data:
-            myfile.write(item + "\n\n")
-
-        myfile.write("##############--- END MESSAGE ---##################\n\n")
+        with open(CONFIG['FollowUp']['recordFile'], "a") as myfile:
+            myfile.write(separator + "\n" + " --- " + WEBSITE \
+                        + " --- " + "\n" + separator + "\n")
+            for item in update_data:
+                myfile.write(item + "\n\n")
 
 run()
