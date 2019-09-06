@@ -8,8 +8,17 @@ config_headings_as_array=' ' read -r -a array <<< "$tidy_config_headings"
 # Pop the "FollowUp" name off the end of the array
 unset "array[${#array[@]}-1]"
 
-# Run script on each website name
+# Run python script on each website name
 for website in "${array[@]}"
 do
     ./handle_py_script.sh "$website"
 done
+
+# Send out email with update information
+./notify_updates.sh
+
+# Clear out contents of record file
+record_file=$(awk -F= '/recordFile/ { print $2 }' config.txt)
+truncate -s 0 "$record_file"
+
+exit
