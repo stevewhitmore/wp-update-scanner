@@ -6,11 +6,12 @@ consumed outside of this file to generate a notification
 """
 import sys
 import configparser
+import datetime
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import StaleElementReferenceException
 
 OPTIONS = webdriver.ChromeOptions()
 OPTIONS.add_argument('--ignore-certificate-errors')
@@ -32,6 +33,7 @@ def run():
 
     log_into_wordpress()
     navigate_to_core_update_page()
+
     core_updates = scan_for_updates('core')
     plugin_updates = scan_for_updates('plugins')
     theme_updates = scan_for_updates('themes')
@@ -49,9 +51,9 @@ def clean_out_file_contents(record_file):
 
 def log_into_wordpress():
     """Use configs to log into wordpress. This is needed for custom login urls"""
-    username = CONFIG['WordPress']['username']
-    password = CONFIG['WordPress']['password']
-    login_url = CONFIG['WordPress']['loginUrl']
+    username = CONFIG[WEBSITE]['username']
+    password = CONFIG[WEBSITE]['password']
+    login_url = CONFIG[WEBSITE]['loginUrl']
     if (not username or not password or not login_url):
         print('###### Invalid configs. Exiting... ######')
         exit()
@@ -66,16 +68,25 @@ def log_into_wordpress():
 
 def navigate_to_core_update_page():
     """Go to specific core update page"""
-    DRIVER.get(CONFIG['WordPress']['updateUrl'])\
+    update_page_xpath = '//*[@id="menu-dashboard"]/ul/li[3]/a'
+
+    try:
+        WebDriverWait(DRIVER, 10).until(
+            EC.presence_of_element_located((By.XPATH, update_page_xpath)))
+
+        DRIVER.get(CONFIG[WEBSITE]['updateUrl'])
+
+    except StaleElementReferenceException as exception:
+        raise exception
 
 
 def scan_for_updates(section):
     """Create a list of string values which are titles of plugin items"""
-    try:
-        selector = determine_selector(section)
+    selector = determine_selector(section)
+    update_element_list = DRIVER.find_elements_by_css_selector(selector)
 
-        plugin_update_element = WebDriverWait(DRIVER, 10).until( \
-                    EC.presence_of_element_located((By.CSS_SELECTOR, selector)))
+    if update_element_list:
+        plugin_update_element = update_element_list[0]
 
         if 'tbody' in selector:
             plugin_title_elements = plugin_update_element \
@@ -89,8 +100,7 @@ def scan_for_updates(section):
 
         return [plugin_update_element.text]
 
-    except NoSuchElementException:
-        return []
+    return []
 
 
 def determine_selector(section):
@@ -109,7 +119,13 @@ def determine_selector(section):
 
 def write_to_file(output_file, update_data):
     """Write values of update data list to output file for notifications"""
+    separator = '###################################################'
+    now = datetime.datetime.now()
+    now_formatted = now.strftime('%A, %B %d %Y at %H:%M:%S')
+
     with open(output_file, "a") as myfile:
+        myfile.write(separator + "\n" + now_formatted + " --- "
+                     + WEBSITE + "\n" + separator + "\n")
         for item in update_data:
             myfile.write(item + "\n\n")
 
