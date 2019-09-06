@@ -1,8 +1,20 @@
-[WordPress]
+[website-a]
 username=foo
 password=bar
-loginUrl=https://your-website.com/wp-login-url
-updateUrl=https://your-website.com/wp-admin/update-core.php
+loginUrl=https://website-a.com/wp-login-url
+updateUrl=https://website-a.com/wp-admin/update-core.php
+
+[website-b]
+username=foo
+password=bar
+loginUrl=https://website-b.com/wp-login-url
+updateUrl=https://website-b.com/wp-admin/update-core.php
+
+[website-c]
+username=foo
+password=bar
+loginUrl=https://website-c.com/wp-login-url
+updateUrl=https://website-c.com/wp-admin/update-core.php
 
 [FollowUp]
 email=swhitmore@localhost
