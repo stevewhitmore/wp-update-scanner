@@ -2,9 +2,9 @@
 
 website=$1
 
-run_update_scanner_script() {
-    python3 ./update_scanner.py "$website"
+run_scan_for_updates_script() {
+    python3 ./scan_for_updates.py "$website"
 }
-error_output=$(run_update_scanner_script 2>&1)
+error_output=$(run_scan_for_updates_script 2>&1)
 
-./results_notify.sh "$error_output"
+./notify_of_results.sh "$error_output"
