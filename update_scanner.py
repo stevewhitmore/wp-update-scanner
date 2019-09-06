@@ -80,7 +80,7 @@ def navigate_to_core_update_page():
 
 
 def scan_for_updates(section):
-    """Create a list of string values which are titles of plugin items"""
+    """Create a list of string values which are titles of update items"""
     selector = determine_selector(section)
     update_element_list = DRIVER.find_elements_by_css_selector(selector)
 
