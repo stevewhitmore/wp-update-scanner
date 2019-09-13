@@ -9,6 +9,6 @@ error_output=$(run_scan_for_updates_script 2>&1)
 
 pkill chromedriver
 
-./notify_errors.sh "$error_output"
+./notify_errors.sh "$error_output" "$website"
 
 exit
