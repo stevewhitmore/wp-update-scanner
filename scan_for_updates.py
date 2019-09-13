@@ -45,7 +45,7 @@ def log_into_wordpress():
     username = CONFIG[WEBSITE]['username']
     password = CONFIG[WEBSITE]['password']
     login_url = CONFIG[WEBSITE]['loginUrl']
-    if (not username or not password or not login_url):
+    if not username or not password or not login_url:
         print('###### Invalid configs. Exiting... ######')
         exit()
 
