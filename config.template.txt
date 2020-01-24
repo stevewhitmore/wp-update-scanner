@@ -17,6 +17,6 @@ loginUrl=https://website-c.com/wp-login-url
 updateUrl=https://website-c.com/wp-admin/update-core.php
 
 [FollowUp]
-email=swhitmore@localhost
+email=recipient@example.com
 recordFile=./update-data.txt
 logFile=./error-log.txt
