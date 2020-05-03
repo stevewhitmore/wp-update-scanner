@@ -120,3 +120,4 @@ def write_to_file(update_data):
                 myfile.write(item + "\n\n")
 
 run()
+DRIVER.quit()
