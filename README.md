@@ -18,3 +18,5 @@ This project is intended to run as a cron job. The bash script kicks off a Pytho
     * OPTIONS.binary_location will need to be changed if non-Linux OS is running this script
 * bash
 * mutt
+
+See [Send Email via Gmail SMTP Server](https://gist.github.com/stevewhitmore/79a459b414d89869708eaff4282097e2) to use your Gmail account for the notification emails (avoids spam filter issues).
