@@ -7,18 +7,19 @@ consumed outside of this file to generate a notification
 import sys
 import configparser
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import StaleElementReferenceException
 
-OPTIONS = webdriver.ChromeOptions()
+OPTIONS = Options()
 OPTIONS.add_argument('--ignore-certificate-errors')
 OPTIONS.add_argument('--test-type')
 OPTIONS.add_argument('--headless')
 OPTIONS.binary_location = '/usr/bin/chromium-browser'
 
-DRIVER = webdriver.Chrome(options=OPTIONS)
+DRIVER = webdriver.Chrome('/usr/bin/chromedriver', options=OPTIONS)
 
 CONFIG = configparser.ConfigParser()
 CONFIG.read('config.txt')
