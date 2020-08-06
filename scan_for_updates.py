@@ -48,7 +48,7 @@ def log_into_wordpress():
     login_url = CONFIG[WEBSITE]['loginUrl']
     if not username or not password or not login_url:
         print('###### Invalid configs. Exiting... ######')
-        exit()
+        sys.exit()
 
     DRIVER.get(login_url)
     DRIVER.find_element_by_id('user_login').clear()
