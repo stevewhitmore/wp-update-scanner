@@ -3,7 +3,7 @@
 website=$1
 
 run_scan_for_updates_script() {
-    python3 ./scan_for_updates.py "$website"
+    python3 ../scripts/scan_for_updates.py "$website"
 }
 error_output=$(run_scan_for_updates_script 2>&1)
 

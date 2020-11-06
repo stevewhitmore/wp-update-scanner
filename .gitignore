@@ -5,3 +5,5 @@
 
 __pycache__
 shared.pyc
+./scripts/dist
+./scripts/MANIFEST
