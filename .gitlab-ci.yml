@@ -9,7 +9,7 @@ shellcheck:
     - apk add shellcheck
     - shellcheck --version
   script:
-    - shellcheck *.sh
+    - shellcheck bin/*.sh
 
 pylint:
   stage: lint
@@ -19,4 +19,4 @@ pylint:
     - pip3 install --no-cache --upgrade pip setuptools
     - pip install selenium
     - pip install pylint
-    - pylint *.py
+    - pylint scripts/*.py
