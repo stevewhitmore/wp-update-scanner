@@ -1,4 +1,4 @@
-image: ubuntu:latest
+image: alpine:latest
 
 stages:
   - lint
@@ -6,15 +6,17 @@ stages:
 shellcheck:
   stage: lint
   before_script:
-    - apt update && apt install -y shellcheck
+    - apk add shellcheck
     - shellcheck --version
   script:
     - shellcheck *.sh
 
 pylint:
-  image: "python:latest"
   stage: lint
   script:
+    - apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
+    - python3 -m ensurepip
+    - pip3 install --no-cache --upgrade pip setuptools
     - pip install selenium
     - pip install pylint
     - pylint *.py
