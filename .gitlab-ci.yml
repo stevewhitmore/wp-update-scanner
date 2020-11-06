@@ -17,4 +17,4 @@ pylint:
   script:
     - pip install selenium
     - pip install pylint
-    - pylint *.py
+    - pylint scripts/*.py
