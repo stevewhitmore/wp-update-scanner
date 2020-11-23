@@ -18,5 +18,5 @@ updateUrl=https://website-c.com/wp-admin/update-core.php
 
 [FollowUp]
 email=recipient@example.com
-recordFile=./update-data.txt
-logFile=./error-log.txt
+recordFile=../update-data.txt
+logFile=../error-log.txt
