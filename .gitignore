@@ -1,9 +1,0 @@
-*.txt
-
-# ignore the other text files but not this one
-!config.template.txt
-
-__pycache__
-shared.pyc
-scripts/dist
-scripts/MANIFEST
