@@ -13,7 +13,7 @@ shellcheck:
     - apk add shellcheck
     - shellcheck --version
   script:
-    - shellcheck ./*.sh
+    - shellcheck ./bin/*.sh
 
 pylint:
   stage: validation
