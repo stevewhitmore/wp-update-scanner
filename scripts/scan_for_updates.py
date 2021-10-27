@@ -114,7 +114,7 @@ def write_to_file(update_data):
     if update_data:
         separator = '###################################################'
 
-        with open(CONFIG['FollowUp']['recordFile'], "a") as myfile:
+        with open(CONFIG["FollowUp"]["recordFile"], "a", encoding="utf-8") as myfile:
             myfile.write(separator + "\n" + " --- " + WEBSITE \
                         + " --- " + "\n" + separator + "\n")
             for item in update_data:
