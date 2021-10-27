@@ -19,4 +19,26 @@ This project is intended to run as a cron job. The Bash script `run.sh` kicks of
 * Bash
 * mutt
 
-See [Send Email via Gmail SMTP Server](https://gist.github.com/stevewhitmore/79a459b414d89869708eaff4282097e2) to use your Gmail account for the notification emails (avoids spam filter issues).
+## Send Email via Gmail SMTP Server
+
+### Set up Gmail App Password
+
+https://myaccount.google.com/apppasswords 
+
+> **Note:** You will need 2FA activated for this to work
+
+### Configure Bash SMTP
+
+`sudo apt-get install mutt`
+
+`vim ~/.muttrc`
+
+```bash
+set from = "<gmail-id>@gmail.com"
+set realname = "<Your Name>"
+set smtp_url = "smtp://<gmail-id>@smtp.gmail.com:587/"
+set smtp_pass = "<smtp password generated in the google link above>"
+
+```
+
+`echo "This is an email body." | mutt -s "This is an email subject" recipient@example.com`
