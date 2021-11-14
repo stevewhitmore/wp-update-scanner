@@ -9,6 +9,8 @@ This project is intended to run as a cron job. The Bash script `run.sh` kicks of
 
 `0 0 * * * cd /path/to/project; run.sh # run script every day at midnight`
 
+> Be sure to update the contents of the `config.template.txt` file and rename it to `config.txt`. 
+
 ### Requirements
 
 * Python v3
