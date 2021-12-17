@@ -22,7 +22,7 @@ OPTIONS.add_argument('--test-type')
 OPTIONS.add_argument('--headless')
 OPTIONS.binary_location = '/usr/bin/chromium-browser'
 
-DRIVER = webdriver.Chrome(service=SERVICE, options=OPTIONS)
+DRIVER = webdriver.Chrome(service=SERVICE, options=OPTIONS) # pylint: disable=E1123
 
 CONFIG = configparser.ConfigParser()
 CONFIG.read('../config.txt')
