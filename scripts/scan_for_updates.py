@@ -7,11 +7,14 @@ consumed outside of this file to generate a notification
 import sys
 import configparser
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import StaleElementReferenceException
+
+SERVICE = Service('/usr/bin/chromedriver')
 
 OPTIONS = Options()
 OPTIONS.add_argument('--ignore-certificate-errors')
@@ -19,7 +22,7 @@ OPTIONS.add_argument('--test-type')
 OPTIONS.add_argument('--headless')
 OPTIONS.binary_location = '/usr/bin/chromium-browser'
 
-DRIVER = webdriver.Chrome('/usr/bin/chromedriver', options=OPTIONS)
+DRIVER = webdriver.Chrome(service=SERVICE, options=OPTIONS)
 
 CONFIG = configparser.ConfigParser()
 CONFIG.read('../config.txt')
@@ -51,11 +54,11 @@ def log_into_wordpress():
         sys.exit()
 
     DRIVER.get(login_url)
-    DRIVER.find_element_by_id('user_login').clear()
-    DRIVER.find_element_by_id('user_login').send_keys(username)
-    DRIVER.find_element_by_id('user_pass').clear()
-    DRIVER.find_element_by_id('user_pass').send_keys(password)
-    DRIVER.find_element_by_id('wp-submit').click()
+    DRIVER.find_element(By.ID, 'user_login').clear()
+    DRIVER.find_element(By.ID, 'user_login').send_keys(username)
+    DRIVER.find_element(By.ID, 'user_pass').clear()
+    DRIVER.find_element(By.ID, 'user_pass').send_keys(password)
+    DRIVER.find_element(By.ID, 'wp-submit').click()
 
 
 def navigate_to_core_update_page():
@@ -75,14 +78,14 @@ def navigate_to_core_update_page():
 def scan_for_updates(section):
     """Create a list of string values which are titles of update items"""
     selector = determine_selector(section)
-    update_element_list = DRIVER.find_elements_by_css_selector(selector)
+    update_element_list = DRIVER.find_elements(By.CSS_SELECTOR, selector)
 
     if update_element_list:
         plugin_update_element = update_element_list[0]
 
         if 'tbody' in selector:
             plugin_title_elements = plugin_update_element \
-                                        .find_elements_by_css_selector('tbody tr td.plugin-title')
+                                        .find_elements(By.CSS_SELECTOR, 'tbody tr td.plugin-title')
             plugin_update_data = []
 
             for title in plugin_title_elements:
