@@ -23,7 +23,7 @@ pylint:
     - ln -sf pip3 /usr/bin/pip
     - python -m ensurepip
     - pip install --no-cache --upgrade pip setuptools
-    - pip install selenium
+    - pip install selenium==3.141.0
     - pip install requests
     - pip install pylint
     - pylint --version
