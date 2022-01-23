@@ -1,7 +1,7 @@
 image: alpine:latest
 
 variables:
-  VERSION: 1.0.1
+  VERSION: 1.0.2
 
 stages:
   - validation

@@ -9,7 +9,7 @@ log_file=$(awk -F= '/logFile/ { print $2 }' ../config.txt)
 if [ -n "$error_output" ]; then
     echo -e '\n' "$date_time" '\n' "$error_output" >> "$log_file"
 
-    echo "There was an error while running wp-update-scanner. Please see \"$log_file\" for details" \
+    echo -e "There was an error while running wp-update-scanner. \n $date_time \n $error_output" \
     | mutt -s "Script Failed: wp-update-scanner for $website" "$report_email"
 fi
 
