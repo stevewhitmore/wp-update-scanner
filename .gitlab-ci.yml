@@ -13,7 +13,7 @@ shellcheck:
     - apk add shellcheck
     - shellcheck --version
   script:
-    - shellcheck ./bin/*.sh
+    - for file in $(find . -name \*.sh); do shellcheck $file; done
 
 pylint:
   stage: validation
@@ -24,7 +24,7 @@ pylint:
     - python -m ensurepip
     - python -m pip install --no-cache --upgrade pip setuptools selenium pylint
     - python -m pylint --version
-    - PYTHONPATH=${PYTHONPATH}:$(dirname %d) python -m pylint .
+    - PYTHONPATH=${PYTHONPATH}:$(dirname %d) python -m pylint ./src
 
 release:
   when: manual
