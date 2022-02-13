@@ -1,4 +1,8 @@
-# WP Update Scanner
+# Changelog fo WP Update Scanner
+
+## 2.0.0
+* Breaking Changes
+  * Directory structure changed to better fit the standards set by PyPA <https://packaging.python.org/en/latest/tutorials/packaging-projects/>
 
 ## 1.0.2
 * Changed

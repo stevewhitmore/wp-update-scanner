@@ -11,11 +11,11 @@ unset "array[${#array[@]}-1]"
 # Run python script on each website name
 for website in "${array[@]}"
 do
-    ./handle_py_script.sh "$website"
+    ./bin/handle_py_script.sh "$website"
 done
 
 # Send out email with update information
-./notify_updates.sh
+./bin/notify_updates.sh
 
 # Clear out contents of record file
 record_file=$(awk -F= '/recordFile/ { print $2 }' ../config.txt)
