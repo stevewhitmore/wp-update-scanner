@@ -7,7 +7,7 @@ This project allows me to scan several websites without adding to the bloat whic
 
 This project is intended to run as a cron job. The Bash script `run.sh` kicks off a Python script which uses the Selenium library to headlessly log into the WordPress admin page. From there it navigates to the core updates page, scans it for update notifications, then writes it to a temporary file. The Bash scripts check for errors outputted by the Python script, writes the errors to a log file, and notifies the user. If the Python script runs as expected the "notify_updates.sh" script will send the information stored in the temporary file to the user.
 
-`0 0 * * * cd /path/to/project; run.sh # run script every day at midnight`
+`0 0 * * * cd /path/to/project/src; run.sh # run script every day at midnight`
 
 > Be sure to update the contents of the `config.template.txt` file and rename it to `config.txt`. 
 
