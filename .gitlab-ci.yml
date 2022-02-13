@@ -18,16 +18,13 @@ shellcheck:
 pylint:
   stage: validation
   script:
-    - apk add --update --no-cache python3
+    - apk add --update --no-cache python3-dev gcc libc-dev libffi-dev
     - ln -sf python3 /usr/bin/python
     - ln -sf pip3 /usr/bin/pip
     - python -m ensurepip
-    - pip install --no-cache --upgrade pip setuptools
-    - pip install selenium==3.141.0
-    - pip install requests
-    - pip install pylint
-    - pylint --version
-    - pylint scripts/*.py
+    - python -m pip install --no-cache --upgrade pip setuptools selenium pylint
+    - python -m pylint --version
+    - PYTHONPATH=${PYTHONPATH}:$(dirname %d) python -m pylint ./src
 
 release:
   when: manual
