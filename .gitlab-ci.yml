@@ -26,12 +26,12 @@ pylint:
     - python -m pylint --version
     - PYTHONPATH=${PYTHONPATH}:$(dirname %d) python -m pylint ./src
 
-release:
+gitlab_release:
   when: manual
   stage: create_tag
   image: registry.gitlab.com/gitlab-org/release-cli:latest
-  script: echo Releasing latest tag...
-  variables:
+  script: echo "Releasing latest tag..."
+  release:
     tag_name: $VERSION
     description: ./CHANGELOG.md
   only:
