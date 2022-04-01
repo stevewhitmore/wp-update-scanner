@@ -1,5 +1,11 @@
 # Changelog fo WP Update Scanner
 
+## 2.1.0
+* Changed
+  * Dockerized the application
+  * Adjusted chromedriver setup to accomodate the Debian container environment
+  * Updated `PATH` variable so `python` command would be recognized in container environment
+
 ## 2.0.0
 * Breaking Changes
   * Directory structure changed to better fit the standards set by PyPA <https://packaging.python.org/en/latest/tutorials/packaging-projects/>
