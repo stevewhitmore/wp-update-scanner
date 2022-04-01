@@ -7,22 +7,16 @@ consumed outside of this file to generate a notification
 import sys
 import configparser
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import StaleElementReferenceException
 
-SERVICE = Service('/usr/bin/chromedriver')
-
-OPTIONS = Options()
-OPTIONS.add_argument('--ignore-certificate-errors')
-OPTIONS.add_argument('--test-type')
+OPTIONS = webdriver.ChromeOptions()
 OPTIONS.add_argument('--headless')
-OPTIONS.binary_location = '/usr/bin/chromium-browser'
-
-DRIVER = webdriver.Chrome(service=SERVICE, options=OPTIONS) # pylint: disable=E1123
+OPTIONS.add_argument('--no-sandbox')
+OPTIONS.add_argument('--disable-dev-shm-usage')
+DRIVER = webdriver.Chrome(options=OPTIONS)
 
 CONFIG = configparser.ConfigParser()
 CONFIG.read('../config.txt')

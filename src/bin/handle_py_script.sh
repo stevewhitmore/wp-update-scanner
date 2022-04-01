@@ -2,8 +2,11 @@
 
 website=$1
 
+### Specify python path for container
+PATH=$PATH:/usr/local/bin
+
 run_scan_for_updates_script() {
-    python3 ./scan_for_updates.py "$website"
+    python ./scan_for_updates.py "$website"
 }
 error_output=$(run_scan_for_updates_script 2>&1)
 
