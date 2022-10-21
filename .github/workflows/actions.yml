@@ -1,0 +1,22 @@
+name: CI
+
+on: [push]
+
+jobs:
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          sudo apt-get install shellcheck
+          shellcheck --version
+          for file in $(find . -name \*.sh); do shellcheck $file; done
+  pylint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          sudo apt-get install python3-pip
+          python -m pip install --no-cache --upgrade pip setuptools selenium pylint
+          python -m pylint --version
+          PYTHONPATH=${PYTHONPATH}:$(dirname %d) python -m pylint ./src

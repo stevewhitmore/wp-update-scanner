@@ -14,7 +14,7 @@ When deployed this project will run every night at midnight local US Central tim
 You'll want to set up your `config.txt` and add a `.muttrc` file in the root directory of this project. This application works best in a Docker environment. I recommend you install it on the host machine if you don't have it installed already. More information on that [here](https://docs.docker.com/engine/install/).
 
 1. Rename the `config.template.txt` file to `config.txt` and replace the values as needed. 
-2. Add a `.muttrc` file to the root directory of this project for the email notifications. Information on sending files via Google SMTP can be found [here](https://gitlab.com/stevewhitmore/notes/-/blob/master/linux/gmail-smtp-bash.md).
+2. Add a `.muttrc` file to the root directory of this project for the email notifications. Information on sending files via Google SMTP can be found [here](https://github.com/stevewhitmore/notes/blob/master/linux/gmail-smtp-bash.md).
 3. From the root directory of this project run `docker build -t wp-scan .` to build the image. There is no prebuilt image available to pull because it needs files with sensitive information that is custom per user.
 4. Run `docker run -d --name wp-update-scanner wp-scan` to run the container. You shouldn't need to expose any ports since there's no need to interact with the container.
 5. If needed, you can SSH into the container with `docker exec -it wp-update-scanner /bin/bash` to adjust things without having to rebuild the image.
