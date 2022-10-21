@@ -4,19 +4,19 @@ on: [push]
 
 jobs:
   shellcheck:
-    runs-on: alpine:latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - run: |
-          apk add shellcheck
+          apt-get install shellcheck
           shellcheck --version
           for file in $(find . -name \*.sh); do shellcheck $file; done
   pylint:
-    runs-on: alpine:latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - run: |
-          apk add --update --no-cache python3-dev gcc libc-dev libffi-dev
+          apt-get install python3-dev gcc libc-dev libffi-dev
           ln -sf python3 /usr/bin/python
           ln -sf pip3 /usr/bin/pip
           python -m ensurepip
