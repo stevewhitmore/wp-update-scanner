@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          python -m ensurepip
+          sudo apt-get install python3-pip
           python -m pip install --no-cache --upgrade pip setuptools selenium pylint
           python -m pylint --version
           PYTHONPATH=${PYTHONPATH}:$(dirname %d) python -m pylint ./src
