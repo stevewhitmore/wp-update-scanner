@@ -1,0 +1,25 @@
+name: CI
+
+on: [push]
+
+jobs:
+  shellcheck:
+    runs-on: alpine:latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: shellcheck
+      - run: |
+          apk add shellcheck
+          shellcheck --version
+          for file in $(find . -name \*.sh); do shellcheck $file; done
+  pylint:
+    runs-on: alpine:latest
+    steps:
+      - run: |
+          apk add --update --no-cache python3-dev gcc libc-dev libffi-dev
+          ln -sf python3 /usr/bin/python
+          ln -sf pip3 /usr/bin/pip
+          python -m ensurepip
+          python -m pip install --no-cache --upgrade pip setuptools selenium pylint
+          python -m pylint --version
+          PYTHONPATH=${PYTHONPATH}:$(dirname %d) python -m pylint ./src
